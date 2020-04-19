@@ -12,7 +12,7 @@ use DBI;
 use DBD::SQLite;
 use Data::Dumper;
 
-use lib '/opt/smokeping/lib'
+use lib '/opt/smokeping/lib';
 use Smokeping;
 
 # CONFIG VARS, CHANGE THESE TO YOUR SETUP.
