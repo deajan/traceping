@@ -10,14 +10,14 @@ use DBI;
 use DBD::SQLite;
 use Data::Dumper;
 
+use lib '/opt/smokeping/lib';
 use Smokeping;
 
-#
 # CONFIG VARS, CHANGE THESE TO YOUR SETUP.
 #
-my $config_file = '/etc/smokeping/config';
+my $config_file = '/opt/smokeping/etc/config';
 
-my $dsn = "dbi:SQLite:dbname=/tmp/test.sqlite";
+my $dsn = "dbi:SQLite:dbname=/opt/smokeping/data/traceping.sqlite";
 my $db_username = '';
 my $db_password = '';
 
