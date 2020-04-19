@@ -59,10 +59,9 @@ sub do_traceroute {
 	my $output = get_traceroute( $host );
 
 	my $dbh = DBI->connect($dsn, $db_username, $db_password);
-	my $index = _get_index( $dbh, $target );
 
-	my $sth = $dbh->prepare( 'UPDATE host SET tracert=? WHERE host_id=?');
-	$sth->execute($output, $index);	
+	my $sth = $dbh->prepare( 'INSERT INTO host (target, tracert) VALUES (?, ?)');
+	$sth->execute($target, $output);	
 }
 
 # get a traceroute's output or die a terrible terrible death (or something)
@@ -88,37 +87,4 @@ sub get_traceroute {
 	close $tracert_out;
 
 	return join("\n", @output[0 .. $last_index_with_data]);
-}
-
-sub _get_index {
-	my ( $dbh, $target ) = @_;
-
-	if ( !exists $index_cache{$target} ) {
-	    my $sth = $dbh->prepare('SELECT host_id FROM host WHERE target=?');
-    	$sth->execute($target);
-    	my $id = $sth->fetchrow_array;
-
-    	# if it doesn't exist the in the db, insert it!
-    	if ( !$id ) {
-    		my $sth = $dbh->prepare( 'INSERT INTO host(target) VALUES(?)');
-    		$sth->execute($target);
-		
-			#TODO: there has to be a better way to do this.
-			if ( $dsn =~ /dbi:SQLite/) {
-				$id = $dbh->func('last_insert_rowid');
-			}
-			elsif ( $dsn =~ /dbi:mysql/) {
-				$id = $dbh->{'mysql_insertid'};
-			}
-			else {
-			    $sth = $dbh->prepare('SELECT host_id FROM host WHERE target=?');
-		    	$sth->execute($target);
-	    		$id = $sth->fetchrow_array;
-    		}
-    	}
-
-		$index_cache{$target} = $id;
-    	return $id;
-	}
-	return $index_cache{$target};
 }
