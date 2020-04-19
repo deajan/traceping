@@ -6,6 +6,9 @@ TracePing is a mod for smokeping that adds traceroute output to the output for a
   - TracePing uses it's own daemon for collecting information
   - TracePing uses a (very simple) SQL backend for storing data
   - TracePing is a bit of a hack.
+  
+The following work is a fork of the very old @mattdess work.
+It removes jquery dependency in favor of plain javascript, and makes it compatible with FastCGI implementation.
 
 
 Prerequisites
