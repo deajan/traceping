@@ -7,22 +7,25 @@ TracePing is a mod for smokeping that adds traceroute output to the output for a
   - TracePing uses a (very simple) SQL backend for storing data
   - TracePing is a bit of a hack.
 
+
+Prerequisites
+-------------
+
+FastCGI perl interface.
+Install with `yum install perl-CGI-fast`
+
+
 Installation
 --------------
 
 Copy traceping.cgi to live along side smokeping.cgi & chmod 0755
 
 ```
-cp smokeping.cgi /usr/lib/cgi-bin/traceping.cgi
-chmod 0755 /usr/lib/cgi-bin/traceping.cgi
+cp smokeping.cgi /opt/smokeping/bin/traceping.cgi
+chmod 0755 /opt/smokeping/bin/traceping.cgi
 ```
 
-Add traceping as a ScriptAlias to apache config (should probably be next to the ScriptAlias for smokeping):
-
-```
-ScriptAlias /smokeping/traceping.cgi /usr/lib/cgi-bin/traceping.cgi
-
-```
+Add fgci script in www root
 
 
 Copy basehtml.html and overwrite the provided one with the modified version
@@ -47,7 +50,11 @@ Install the POE perl module (may exist in OS repos!)
 most distros: cpan POE DBI DBD::SQLite
 
 ubuntu/debian: sudo apt-get install libdbi-perl libpoe-perl libdbd-sqlite3-perl libpoe-perl
+RHEL/Centos 7 with EPEL repository: yum install perl-DBD-SQLite
+RHEL/CentOS 8: dnf install cpan && cpan POE
 ```
+
+Modify paths to smokeping config and database in traceping_daemon.pl
 
 License
 --------------
