@@ -36,13 +36,19 @@ while (my $q = CGI::Fast->new) {
 
     sub get_traceroute {
 	my ( $target ) = @_;
-        my $dbh = DBI->connect($dsn, $db_username, $db_password);    
-        my $sth = $dbh->prepare('SELECT tracert FROM host WHERE target=?');
-        $sth->execute($target);
-        my $result = $sth->fetchrow_array;
-        if ( $result ) {
-    	    return $result;
-        }
-        return 'No Traceroute Data Found';
+	my $result = "";
+	my $dbh = DBI->connect($dsn, $db_username, $db_password);
+	my $sth = $dbh->prepare('SELECT timestamp, tracert FROM host WHERE target=? ORDER BY record_id DESC LIMIT 5');
+	$sth->execute($target);
+	my @row;
+	while (@row = $sth->fetchrow_array) {
+		my ($date, $tracert) = @row;
+		$result = $result . $date . ':<br>' . $tracert . '<br><br>';
+	}
+	if ( $result) {
+	return $result;
+	}
+    return 'No Traceroute Data Found';
+
     }
 }
