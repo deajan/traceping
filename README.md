@@ -1,15 +1,17 @@
-TracePing
-=========
+TracePing Quick and dirty
+=========================
+
+The following work is a fork of the very old work from @mattdess.
+It removes jquery dependency in favor of plain javascript, and makes it compatible with FastCGI implementation.
+It also historises traceroutes and adds timestamps of measures.
+
+This is mostly a quick and dirty repo I needed in order to keep traceroute history on a smokeping server without any other dependancies that what Smokeping uses.
 
 TracePing is a mod for smokeping that adds traceroute output to the output for a node.
 
   - TracePing uses it's own daemon for collecting information
   - TracePing uses a (very simple) SQL backend for storing data
   - TracePing is a bit of a hack.
-  
-The following work is a fork of the very old @mattdess work.
-It removes jquery dependency in favor of plain javascript, and makes it compatible with FastCGI implementation.
-
 
 Prerequisites
 -------------
@@ -74,4 +76,4 @@ License
 Licensed under a BSD license
 ```
 
-Development funded by [Rack911](http://rack911.com)
+Forked from @mattdees
