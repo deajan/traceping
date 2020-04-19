@@ -28,7 +28,16 @@ chmod 0755 /opt/smokeping/bin/traceping.cgi
 Add fgci script in www root
 
 
-Copy basehtml.html and overwrite the provided one with the modified version
+Modify your basepage.html file (generally in /opt/smokeping/etc) and add the traceping.js script
+Source should look like:
+```
+<script src="js/prototype.js" type="text/javascript"></script>
+<script src="js/scriptaculous/scriptaculous.js?load=builder,effects,dragdrop" type="text/javascript"></script>
+<script src="js/cropper/cropper.js" type="text/javascript"></script>
+<script src="js/smokeping.js" type="text/javascript"></script>
+// Added script
+<script src="js/traceping.js" type="text/javascript"></script>
+```
 
 
 ```
