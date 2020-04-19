@@ -1,5 +1,6 @@
 CREATE TABLE main.host (
-  host_id INTEGER PRIMARY KEY NOT NULL,
+  record_id INTEGER PRIMARY KEY AUTOINCREMENT,
   target varchar(64),
-  tracert TEXT
+  tracert TEXT,
+  timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
 );
