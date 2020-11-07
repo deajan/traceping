@@ -1,3 +1,8 @@
+UPDATE
+======
+
+**This repo has been replaced by https://github.com/deajan/traceroute_history**
+
 TracePing Quick and dirty
 =========================
 
